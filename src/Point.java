@@ -1,5 +1,5 @@
 public class Point {
-    // сделать иммутабельным
+
     private double axisX;
     private double axisY;
 

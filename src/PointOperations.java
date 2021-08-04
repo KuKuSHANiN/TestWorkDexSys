@@ -4,18 +4,16 @@ import java.util.*;
 
 import static java.lang.Integer.parseInt;
 
-public class CoordinatePoint {
-    private final List<Point> points = new ArrayList<>();
-    private double axisX;
-    private double axisY;
-    private static final List<Point> listPoint1 = new ArrayList<>();
-    private static final List<Point> listPoint2 = new ArrayList<>();
-    private static final List<Point> listPoint3 = new ArrayList<>();
-    private static final List<Point> outOfListPoint = new ArrayList<>();
+public class PointOperations {
+    private static final List<Point> points = new ArrayList<>();
+    private static  List<Point> listPoint1 = new ArrayList<>();
+    private static  List<Point> listPoint2 = new ArrayList<>();
+    private static  List<Point> listPoint3 = new ArrayList<>();
+    private static  List<Point> outOfListPoint = new ArrayList<>();
 
 
-    public void addPoint(String points) throws PointCountException, PointTypeException {
-        String[] pointsArrayString = points.split(" ");   // рзбиваем введенную строку на массив строк
+    public static void addPoint(String pointString) throws PointCountException, PointTypeException {
+        String[] pointsArrayString = pointString.split(" ");   // рзбиваем введенную строку на массив строк
         // создаем новый массив листов для записи в него массива строк , для удобства
 
         if (pointsArrayString.length % 2 != 0) {
@@ -26,85 +24,61 @@ public class CoordinatePoint {
                 double X = Double.parseDouble(pointsArrayString[i]);
                 double Y = Double.parseDouble(pointsArrayString[i + 1]);
                 Point point = new Point(X, Y);
-                this.points.add(point);
+                points.add(point);
             } catch (NumberFormatException e) {
                 System.out.println("Not enough points for coordinates. Tru again.");
                 Scanner in = new Scanner(System.in);
                 addPoint(in.nextLine());
             }
         }
-        System.out.println(this.points);
+        System.out.println(points);
     }
 
 
-    public void print() {
+    public static void print() {
 
 
-        for (Point point : this.points) {
-            this.axisX = point.getAxisX();
-            this.axisY = point.getAxisY();
-// Группа У=Х
+        for (Point point : points) {
+            double axisX = point.getAxisX();
+            double axisY = point.getAxisY();
 
-            if (axisX >= axisY) {
+
+            if (axisX <= axisY) {
                 listPoint1.add(point);
-            } else {
+            }
+            if (axisY <= Math.pow(axisX, 2.0)) {
+                listPoint2.add(point);
+
+            }
+            if (axisY <= (axisX * axisX * axisX)) {
+                listPoint3.add(point);
+            }
+            if (!listPoint1.contains(point) && listPoint2.contains(point) && listPoint3.contains(point)) {
                 outOfListPoint.add(point);
             }
+            System.out.println("Check point task 1 : " + listPoint1.toString());
+            System.out.println("Check point task 2 : " + listPoint2.toString());
+            System.out.println("Check point task 3 : " + listPoint3.toString());
+            System.out.println("Uncheck point : " + outOfListPoint.toString());
+
         }
-        if (listPoint1.isEmpty()) {
-            System.out.println("Group 1 is empty");
-        } else System.out.println("Check point task 1 : " + listPoint1);
-
-//Группа У=Х^2
-
-        for (Point value : this.points) {
-            if (axisY <= axisX * axisX) {
-                listPoint2.add(value);
-                System.out.println(axisX);
-            } else if
-            (outOfListPoint.contains(value)) {
-                System.out.println("This point already in");
-            } else outOfListPoint.add(value);
-        }
-        if (listPoint2.isEmpty()) {
-            System.out.println("Group 2 is empty");
-        } else System.out.println("Check point task 2 : " + listPoint2);
-
-// Группа У=Х^3
-
-        for (Point point : this.points) {
-            if (axisY <= axisX * axisX * axisX) {
-                listPoint3.add(point);
-            } else if
-            (outOfListPoint.contains(point)) {
-                System.out.println("This point already in");
-            } else outOfListPoint.add(point);
-        }
-        if (listPoint3.isEmpty()) {
-            System.out.println("Group 1 is empty");
-        } else System.out.println("Check point task 1 : " + listPoint3);
-
-
-        System.out.println("Check point task 3 : " + listPoint3.toString());
-        System.out.println("Uncheck point : " + outOfListPoint.toString());
-
     }
 
-    public void print(String group) {
+    public static void print(String group) {
         String[] groupNum = group.split(" ");
         for (String s : groupNum) {
             int Num = parseInt(s);
 
             switch (Num) {
-                case 1 -> System.out.println(this.listPoint1);
-                case 2 -> System.out.println(this.listPoint2);
-                case 3 -> System.out.println(this.listPoint3);
+                case 1 -> System.out.println(listPoint1);
+                case 2 -> System.out.println(listPoint2);
+                case 3 -> System.out.println(listPoint3);
             }
         }
         System.out.println("Done");
     }
 
-    public void remove(String group) {
+    public static void remove(String group) {
         String[] groupNum = group.split(" ");
         for (String s : groupNum) {
             int Num = parseInt(s);
@@ -118,15 +92,21 @@ public class CoordinatePoint {
         System.out.println("Done");
     }
 
-    public void clear() {
+    public static void clear() {
+        points.clear();
 
         listPoint1.clear();
+        System.out.println(listPoint1.toString());
         listPoint2.clear();
+        System.out.println(listPoint1.toString());
         listPoint3.clear();
+        System.out.println(listPoint1.toString());
+        outOfListPoint.clear();
+        System.out.println(listPoint1.toString());
         System.out.println("Done");
     }
 
-    public void help() {
+    public static void help() {
         System.out.println("Program operates with the coordinates of points checking them " +
                 "for belonging to the conditions Y=X; Y=X^2; Y=X^3");
         System.out.println("1. add point - adds coordinate points from your console in next order: 1 2 3 4 " +
