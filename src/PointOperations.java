@@ -32,6 +32,7 @@ public class PointOperations {
             }
         }
         System.out.println(points);
+        System.out.println();
     }
 
 
@@ -60,6 +61,7 @@ public class PointOperations {
             System.out.println("Check point task 2 : " + listPoint2.toString());
             System.out.println("Check point task 3 : " + listPoint3.toString());
             System.out.println("Uncheck point : " + outOfListPoint.toString());
+            System.out.println();
 
         }
     }
@@ -70,12 +72,13 @@ public class PointOperations {
             int Num = parseInt(s);
 
             switch (Num) {
-                case 1 -> System.out.println(listPoint1);
-                case 2 -> System.out.println(listPoint2);
-                case 3 -> System.out.println(listPoint3);
+                case 1 -> System.out.println("Group № 1 " + listPoint1);
+                case 2 -> System.out.println("Group № 1 " + listPoint2);
+                case 3 -> System.out.println("Group № 1 " + listPoint3);
             }
         }
         System.out.println("Done");
+        System.out.println();
     }
 
     public static void remove(String group) {
@@ -90,36 +93,44 @@ public class PointOperations {
             }
         }
         System.out.println("Done");
+        System.out.println();
     }
 
     public static void clear() {
         points.clear();
 
         listPoint1.clear();
-        System.out.println(listPoint1.toString());
+        System.out.println("Group 1 is : " + listPoint1.toString());
         listPoint2.clear();
-        System.out.println(listPoint1.toString());
+        System.out.println("Group 2 is : " + listPoint1.toString());
         listPoint3.clear();
-        System.out.println(listPoint1.toString());
+        System.out.println("Group 3 is : " + listPoint1.toString());
         outOfListPoint.clear();
-        System.out.println(listPoint1.toString());
         System.out.println("Done");
+        System.out.println();
     }
 
     public static void help() {
         System.out.println("Program operates with the coordinates of points checking them " +
                 "for belonging to the conditions Y=X; Y=X^2; Y=X^3");
+        System.out.println();
         System.out.println("1. add point - adds coordinate points from your console in next order: 1 2 3 4 " +
                 "it means X1,Y1 = (1,2); X2,Y2 = (3,4); AND NO LETTERS  ");
+        System.out.println();
         System.out.println("2. print - prints all the coordinates of the points line by line " +
                 "first line - y=x" +
                 "second line - y=x^2" +
                 "third line - y=x^3" +
                 "fourth line - points are not included in any group");
+        System.out.println();
         System.out.println("3. print <group num> - prints coordinates of points from the selected group ");
+        System.out.println();
         System.out.println("4. remove <group num> - delete coordinates point from the selected group ");
+        System.out.println();
         System.out.println("5. clear - delete all point from all groups");
+        System.out.println();
         System.out.println("6. help - it's too easy");
+        System.out.println();
     }
 }
 
